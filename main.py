@@ -1,14 +1,14 @@
 body=[[1,0],[2,0],[1,1],[2,1]]
 obraz=[[0,0],[0,0],[0,0],[0,0]]
 
-counter=0
+
 A1=[0,0]
 B1=[0,0]
 C1=[0,0]
 D1=[0,0]
 stred=[2,2]
 display()
-
+counter=0
 def vypocet():
     global obraz, body
     counter=0
@@ -36,27 +36,22 @@ def display():
         typ=obraz
 
 def on_button_pressed_a():
-    global counter, A,B,C,D
-    
+    global body, counter
     counter+=1
     if counter<=2:
-        B[0]+=1
-        C[1]+=1
-        D[0]+=1
-        D[1]+=1
+        body[1][0]+=1
+        body[2][1]+=1
+        body[3][0]+=1
+        body[3][1]+=1
         basic.clear_screen()
         display()
     elif counter==3:
-        B[0]-=2
-        C[1]-=2
-        D[0]-=2
-        D[1]-=2
+        body[1][0]-=2
+        body[2][1]-=2
+        body[3][0]-=2
+        body[3][1]-=2
         basic.clear_screen()
         counter=0
         display()
-    console.log_value("A", A)
-    console.log_value("B", B)
-    console.log_value("C", C)
-    console.log_value("D", D)
 input.on_button_pressed(Button.A, on_button_pressed_a)
 

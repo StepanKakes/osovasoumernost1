@@ -1,63 +1,59 @@
-let A = [1, 0]
-let B = [2, 0]
-let C = [1, 1]
-let D = [2, 1]
-let counter = 0
+let body = [[1, 0], [2, 0], [1, 1], [2, 1]]
+let obraz = [[0, 0], [0, 0], [0, 0], [0, 0]]
 let A1 = [0, 0]
 let B1 = [0, 0]
 let C1 = [0, 0]
 let D1 = [0, 0]
 let stred = [2, 2]
 display()
+let counter = 0
 function vypocet() {
     
     let counter = 0
-    for (let i of A) {
-        A1[1] = Math.abs(i - 4)
+    for (let x of body) {
+        obraz[counter][0] = body[counter][0]
+        obraz[counter][1] = body[counter][1]
+        obraz[counter][0] = Math.abs(obraz[counter][0] - 4)
+        obraz[counter][1] = Math.abs(obraz[counter][1] - 4)
+        // console.log_value("counter", counter)
         counter += 1
     }
 }
 
-function obraz() {
-    
-    vypocet()
-    led.plot(A1[0], A1[1])
-    led.plot(B1[0], B1[1])
-    led.plot(C1[0], C1[1])
-    led.plot(D1[0], D1[1])
-}
-
 function display() {
-    obraz()
+    let counter: number;
+    
     led.plotBrightness(stred[0], stred[1], 100)
-    led.plot(A[0], A[1])
-    led.plot(B[0], B[1])
-    led.plot(C[0], C[1])
-    led.plot(D[0], D[1])
+    vypocet()
+    let typ = body
+    for (let k = 0; k < 2; k++) {
+        counter = 0
+        for (let i of body) {
+            led.plot(typ[counter][0], typ[counter][1])
+            counter += 1
+        }
+        typ = obraz
+    }
 }
 
 input.onButtonPressed(Button.A, function on_button_pressed_a() {
     
     counter += 1
     if (counter <= 2) {
-        B[0] += 1
-        C[1] += 1
-        D[0] += 1
-        D[1] += 1
+        body[1][0] += 1
+        body[2][1] += 1
+        body[3][0] += 1
+        body[3][1] += 1
         basic.clearScreen()
         display()
     } else if (counter == 3) {
-        B[0] -= 2
-        C[1] -= 2
-        D[0] -= 2
-        D[1] -= 2
+        body[1][0] -= 2
+        body[2][1] -= 2
+        body[3][0] -= 2
+        body[3][1] -= 2
         basic.clearScreen()
         counter = 0
         display()
     }
     
-    console.logValue("A", A)
-    console.logValue("B", B)
-    console.logValue("C", C)
-    console.logValue("D", D)
 })
